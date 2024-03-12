@@ -57,8 +57,8 @@
         border-radius: 5px;
         margin: 5px;
         padding: 5px;
-        max-width: 150px;
-        max-height: 150px;
+        max-width: 170px;
+        max-height: 170px;
       }
       .thumbnail:hover {
         border-color: #4caf50;
@@ -80,21 +80,20 @@
       <!-- Add more video thumbnails -->
     </div>
     <h1>Photos</h1>
-    <div class="image-container">
-      <img class="thumbnail" src="./images/DSC_3698.JPG" alt="Image" onclick="openModal('./images/DSC_3698.JPG', '')" />
-      <img class="thumbnail" src="./images/DSC_3890.JPG" alt="Image" onclick="openModal('./images/DSC_3890.JPG', '')" />
+    <div class="image-container" id="thumbnails">
+      <!-- Thumbnails will be dynamically generated here -->
     </div>
 
     <!-- <div class="navigation-buttons">
-      <button onclick="prevImage()">Previous</button>
-      <button onclick="nextImage()">Next</button>
-    </div> -->
+  <button onclick="prevImage()">Previous</button>
+  <button onclick="nextImage()">Next</button>
+</div> -->
 
     <script>
+      const thumbnailsContainer = document.getElementById("thumbnails");
+      const numberOfImages = 43; // Specify the number of images you want
       const media = [
         { type: "video", src: "./videos/00003.mp4" },
-        { type: "image", src: "./images/DSC_3698.JPG" },
-        { type: "image", src: "./images/DSC_3890.JPG" },
         // Add more media objects
       ];
       let currentIndex = 0;
@@ -150,6 +149,20 @@
           openModal("", currentMedia.src);
         }
       }
+
+      // Generate image filenames based on the pattern
+      for (let i = 1; i <= numberOfImages; i++) {
+        const filename = `DSC_${i}.JPG`;
+        const thumbnailImg = document.createElement("img");
+        thumbnailImg.classList.add("thumbnail");
+        thumbnailImg.src = `./images/${filename}`;
+        thumbnailImg.alt = "Image";
+        thumbnailImg.onclick = function () {
+          openModal(`./images/${filename}`, "");
+        };
+        thumbnailsContainer.appendChild(thumbnailImg);
+      }
+      media.push(...Array.from({ length: numberOfImages }, (_, i) => ({ type: "image", src: `./images/DSC_${i + 1}.JPG` })));
 
       // Event listeners for keyboard navigation
       document.addEventListener("keydown", function (event) {
