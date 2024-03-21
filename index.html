@@ -29,6 +29,7 @@
         display: block;
         width: 80%;
         max-width: 630px;
+        position: relative;
       }
       .modal-content img,
       .modal-content video {
@@ -63,12 +64,32 @@
       .thumbnail:hover {
         border-color: #4caf50;
       }
+      .prev,
+      .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
     </style>
   </head>
   <body>
     <!-- The Modal -->
     <div id="myModal" class="modal">
       <span class="close" onclick="closeModal()">&times;</span>
+      <button class="prev" onclick="prevMedia()">&#10094;</button>
+      <button class="next" onclick="nextMedia()">&#10095;</button>
       <div class="modal-content">
         <img id="modal-image" src="" alt="Image" />
         <video id="modal-video" src="" controls></video>
@@ -83,11 +104,6 @@
     <div class="image-container" id="thumbnails">
       <!-- Thumbnails will be dynamically generated here -->
     </div>
-
-    <!-- <div class="navigation-buttons">
-  <button onclick="prevImage()">Previous</button>
-  <button onclick="nextImage()">Next</button>
-</div> -->
 
     <script>
       const thumbnailsContainer = document.getElementById("thumbnails");
