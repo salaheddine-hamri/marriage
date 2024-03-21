@@ -107,7 +107,7 @@
 
     <script>
       const thumbnailsContainer = document.getElementById("thumbnails");
-      const numberOfImages = 80; // Specify the number of images you want
+      const numberOfImages = 120; // Specify the number of images you want
       const media = [
         { type: "video", src: "./videos/00003.mp4" },
         // Add more media objects
@@ -171,7 +171,7 @@
         const filename = `DSC_${i}.JPG`;
         const thumbnailImg = document.createElement("img");
         thumbnailImg.classList.add("thumbnail");
-        thumbnailImg.src = `./images/${filename}`;
+        thumbnailImg.src = `./thumbnails/${filename}`;
         thumbnailImg.alt = "Image";
         thumbnailImg.onclick = function () {
           openModal(`./images/${filename}`, "");
